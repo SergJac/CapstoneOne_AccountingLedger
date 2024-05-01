@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 public class Deposit {
     public static void addTransactions(ArrayList<Transactions> transaction) {
-        Scanner scanner2 = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter Your Name: ");
-        String vendorInput = scanner2.nextLine();
+        String vendorInput = scanner.nextLine();
         System.out.print("Enter Amount You Wish to Deposit: ");
-        float amountInput = scanner2.nextFloat();
+        float amountInput = scanner.nextFloat();
 
         // Adding user input transaction
         transaction.add(new Transactions(

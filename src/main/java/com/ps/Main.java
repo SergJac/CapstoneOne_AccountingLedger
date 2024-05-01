@@ -20,13 +20,14 @@ public class Main {
         transaction.add(new Transactions(LocalDate.of(2023, 4, 15), LocalTime.of(11, 15), "Invoice 1001 paid", "Joe", 1500.00f));
 
         while (true) {
-            // nsj store brand name
-            // using initials of each team member
+
             System.out.println("Home Screen");
             System.out.println("D) Add Deposit");
             System.out.println("P) Make Payment(Debit)");
             System.out.println("L) Ledger");
             System.out.println("X) Exit");
+
+            System.out.println();
 
             System.out.print("Please enter your choice: ");
             String choice = scanner.nextLine().toUpperCase();
@@ -36,9 +37,11 @@ public class Main {
             switch (choice) {
                 case "D":
                     System.out.println("You chose Add Deposit");
+                    Deposit.addTransactions(transaction);
                     break;
                 case "P":
                     System.out.println("You chose Make Payment(Debit)");
+                    Payment.addTransaction(transaction);
                     break;
                 case "L":
                     System.out.println("You chose Ledger");
@@ -53,8 +56,6 @@ public class Main {
             }
 
             System.out.println();
-
-            Deposit.addTransactions(transaction);
 
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv"))) {
                 for (Transactions transactionList : transaction) {
