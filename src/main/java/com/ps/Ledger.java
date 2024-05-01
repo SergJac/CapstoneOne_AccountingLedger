@@ -28,6 +28,7 @@ public class Ledger {
                 case "D":
                     System.out.println("You selected: Deposits");
                     // Call a method to display only deposits
+                    onlyDepositTransaction(allTransactions);
                     break;
                 case "P":
                     System.out.println("You selected: Payments");
@@ -60,6 +61,32 @@ public class Ledger {
                     transaction.getVendor(),
                     transaction.getAmount());
             System.out.println(formattedTransaction);
+        }
+    }
+
+    private static void onlyDepositTransaction(ArrayList<Transactions> depositTransaction) {
+        ArrayList<Transactions> searchResults = new ArrayList<>();
+        for (int i = depositTransaction.size() - 1; i >= 0; i--) {
+            Transactions transaction = depositTransaction.get(i);
+            if (transaction.getDescription().toLowerCase().contains("deposit")) {
+                searchResults.add(transaction);
+            }
+
+        }
+
+        if (!searchResults.isEmpty()) {
+            System.out.println("Search results:");
+            for (Transactions transactions : searchResults) {
+                String formattedTransaction = String.format("%s|%s|%s|%s|%.2f",
+                        transactions.getDate(),
+                        transactions.getTime(),
+                        transactions.getDescription(),
+                        transactions.getVendor(),
+                        transactions.getAmount());
+                System.out.println(formattedTransaction);
+            }
+        } else {
+            System.out.println("No matching transactions found.");
         }
 
     }
