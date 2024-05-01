@@ -45,6 +45,7 @@ public class Main {
                     break;
                 case "L":
                     System.out.println("You chose Ledger");
+                    Ledger.displayLedgerMenu(scanner, transaction);
                     break;
                 case "X":
                     System.out.println("Exiting the program");
