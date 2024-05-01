@@ -33,6 +33,7 @@ public class Ledger {
                 case "P":
                     System.out.println("You selected: Payments");
                     // Call a method to display only payments
+                    onlyPaymentTransaction(allTransactions);
                     break;
                 case "R":
                     System.out.println("You selected: Reports");
@@ -90,4 +91,32 @@ public class Ledger {
         }
 
     }
+
+    private static void onlyPaymentTransaction(ArrayList<Transactions> paymentTransaction) {
+        ArrayList<Transactions> searchResults = new ArrayList<>();
+        for (int i = paymentTransaction.size() - 1; i >= 0; i--) {
+            Transactions transaction = paymentTransaction.get(i);
+            if (transaction.getDescription().toLowerCase().contains("payment") || transaction.getAmount() < 0) {
+                searchResults.add(transaction);
+            }
+
+        }
+
+        if (!searchResults.isEmpty()) {
+            System.out.println("Search results:");
+            for (Transactions transactions : searchResults) {
+                String formattedTransaction = String.format("%s|%s|%s|%s|%.2f",
+                        transactions.getDate(),
+                        transactions.getTime(),
+                        transactions.getDescription(),
+                        transactions.getVendor(),
+                        transactions.getAmount());
+                System.out.println(formattedTransaction);
+            }
+        } else {
+            System.out.println("No matching transactions found.");
+        }
+
+    }
+
 }
