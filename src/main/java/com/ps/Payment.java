@@ -17,7 +17,6 @@ public class Payment {
         System.out.print("Enter amount: ");
         float amountInput = Math.abs(scanner.nextFloat());
 
-
         transactions.add(new Transactions(
                 LocalDate.now(),
                 LocalTime.now().withNano(0),

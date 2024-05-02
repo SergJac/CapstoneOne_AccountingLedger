@@ -1,0 +1,34 @@
+2022-06-20|09:45:32|Monthly salary deposit|Company XYZ|2500.65
+2022-07-05|14:20:10|Electricity bill payment|Utility Co.|-120.43
+2022-08-12|16:30:45|Cash deposit|ATM|300.48
+2022-09-03|12:05:20|Internet subscription payment|ISP Co.|-50.72
+2022-10-18|08:40:15|Freelance project payment|Client ABC|-350.93
+2022-11-22|10:55|Rent|Landlord|-1000.68
+2022-12-29|17:15:30|Cell phone bill payment|Telecom Co.|-80.47
+2023-01-14|13:20:45|Bonus deposit|Employer|500.53
+2023-02-08|11:30:10|Software subscription payment|Software Co.|-25.04
+2023-03-05|09:25:20|Gas bill payment|Utility Co.|-90.38
+2023-04-11|15:40|Refund deposit|Online Store XYZ|50.38
+2023-04-15|10:13:25|ergonomic keyboard|Amazon|-89.50
+2023-04-15|11:15|Invoice 1001 paid|Joe|1500.00
+2023-05-07|14:10:30|Credit card payment|Bank XYZ|-200.26
+2023-06-02|10:15:45|Dividend deposit|Investment Firm|150.17
+2023-07-19|11:35|Loan payment|Bank XYZ|-300.75
+2023-08-26|08:20:15|Stock dividend deposit|Investment Firm|100.20
+2023-09-30|09:50:20|Water bill payment|Utility Co.|-70.65
+2023-10-15|12:05:30|Freelance project payment|Client ABC|-400.98
+2023-11-19|14:30:45|Vacation payment|Travel Agency|-800.54
+2023-12-24|16:40|Car insurance payment|Insurance Co.|-180.05
+2024-01-01|10:10:10|New Year's bonus deposit|Employer|300.21
+2024-02-02|09:15:25|Monthly salary deposit|Company XYZ|2500.87
+2024-03-10|11:20:40|Credit card payment|Bank XYZ|-150.32
+2024-04-15|13:35:55|Invoice 1001 paid|Joe|1500.00
+2024-05-20|14:45|Rent|Landlord|-1000.38
+2024-06-25|16:55:15|Internet subscription payment|ISP Co.|-60.47
+2024-07-30|08:05:30|Cash deposit|ATM|200.92
+2024-08-05|10:10:45|Electricity bill payment|Utility Co.|-110.98
+2024-09-10|12:25|Freelance project payment|Client ABC|-380.58
+
+2024-05-01|22:33:58|Deposit|Sergio|904.30
+2024-05-01|22:34:11|Insurance|State Farm|-890.32
+2024-05-01|22:34:11|Insurance|State Farm|-890.32

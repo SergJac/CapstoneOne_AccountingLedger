@@ -13,7 +13,6 @@ public class Deposit {
         System.out.print("Enter Amount You Wish to Deposit: ");
         float amountInput = scanner.nextFloat();
 
-        // Adding user input transaction
         transaction.add(new Transactions(
                 LocalDate.now(),
                 LocalTime.now().withNano(0),
