@@ -6,8 +6,12 @@ import java.util.Scanner;
 import java.time.YearMonth;
 
 public class Ledger {
-    public static void displayLedgerMenu(Scanner scanner, ArrayList<Transactions> allTransactions) {
-        while (true) {
+    public static void displayLedgerMenu(Scanner scanner, ArrayList<Transactions> transactions) {
+        boolean exitSubMenu = false;
+
+        String ledgerChoice;
+
+        do {
 
             System.out.println("Ledger Options:");
             System.out.println("A) All");
@@ -18,27 +22,29 @@ public class Ledger {
 
 
             System.out.print("Enter your choice: ");
-            String ledgerChoice = scanner.nextLine().toUpperCase(); // Convert input to uppercase
+            ledgerChoice = scanner.nextLine().toUpperCase();
 
 
             switch (ledgerChoice) {
                 case "A":
                     System.out.println("You selected: All");
-                    displayAllTransactions(allTransactions);
+                    displayAllTransactions(transactions);
                     break;
                 case "D":
                     System.out.println("You selected: Deposits");
 
-                    onlyDepositTransaction(allTransactions);
+                    onlyDepositTransaction(transactions);
                     break;
                 case "P":
                     System.out.println("You selected: Payments");
 
-                    onlyPaymentTransaction(allTransactions);
+                    onlyPaymentTransaction(transactions);
                     break;
                 case "R":
+                    System.out.println();
                     System.out.println("You selected: Reports");
-                    while (true) {
+                    int choice;
+                    do {
                         System.out.println("1) Month to date");
                         System.out.println("2) Previous Month");
                         System.out.println("3) Year to Date");
@@ -47,57 +53,55 @@ public class Ledger {
                         System.out.println("0) Back");
 
                         System.out.print("Please enter your selection: ");
-                        int choice = scanner.nextInt();
+                        choice = scanner.nextInt();
                         scanner.nextLine();
 
                         switch (choice) {
                             case 1:
                                 System.out.println("You Chose: Month to Date");
-                                monthToDateTransactions(allTransactions);
+                                monthToDateTransactions(transactions);
                                 break;
                             case 2:
                                 System.out.println("You Chose: Previous Month");
-                                lastMonthTransactions(allTransactions);
+                                lastMonthTransactions(transactions);
                                 break;
                             case 3:
                                 System.out.println("You Chose: Year to Date");
-                                yearToDateTransactions(allTransactions);
+                                yearToDateTransactions(transactions);
                                 break;
                             case 4:
-                                System.out.println("You Chose: Previous");
-                                lastYearTransactions(allTransactions);
+                                System.out.println("You Chose: Previous Year");
+                                lastYearTransactions(transactions);
                                 break;
                             case 5:
                                 System.out.println("You Chose: Search by Vendor");
-                                searchByVendor(allTransactions);
+                                searchByVendor(transactions);
                                 break;
                             case 0:
                                 break;
                             default:
                                 System.out.println("Invalid choice! Try again!");
                         }
-                        if (choice == 0) {
-                            break;
-                        }
 
-                    }
+                    } while (choice != 0);
+
                     break;
                 case "H":
-                    System.out.println("Returning to Home");
-                    return;
+                    exitSubMenu = true;
+                    break;
                 default:
                     System.out.println("Invalid choice. Please select a valid option.");
             }
 
             System.out.println();
 
-        }
+        } while (!exitSubMenu);
 
     }
 
-    private static void displayAllTransactions(ArrayList<Transactions> allTransactions) {
-        for (int i = allTransactions.size() - 1; i >= 0; i--) {
-            Transactions transaction = allTransactions.get(i);
+    private static void displayAllTransactions(ArrayList<Transactions> transactions) {
+        for (int i = transactions.size() - 1; i >= 0; i--) { // this line allows the user to see the latest entry first
+            Transactions transaction = transactions.get(i);
             String formattedTransaction = String.format("%s|%s|%s|%s|%.2f",
                     transaction.getDate(),
                     transaction.getTime(),
@@ -108,11 +112,11 @@ public class Ledger {
         }
     }
 
-    private static void onlyDepositTransaction(ArrayList<Transactions> depositTransaction) {
+    private static void onlyDepositTransaction(ArrayList<Transactions> transactions) {
         ArrayList<Transactions> searchResults = new ArrayList<>();
-        for (int i = depositTransaction.size() - 1; i >= 0; i--) {
-            Transactions transaction = depositTransaction.get(i);
-            if (transaction.getDescription().toLowerCase().contains("deposit")) {
+        for (int i = transactions.size() - 1; i >= 0; i--) {
+            Transactions transaction = transactions.get(i);
+            if (transaction.getDescription().toLowerCase().contains("deposit")|| transaction.getAmount() > 0) { // this line searches for any value that has the word "deposit" or that has a number greater than 0
                 searchResults.add(transaction);
             }
 
@@ -120,13 +124,13 @@ public class Ledger {
 
         if (!searchResults.isEmpty()) {
             System.out.println("Search results:");
-            for (Transactions transactions : searchResults) {
+            for (Transactions transaction : searchResults) {
                 String formattedTransaction = String.format("%s|%s|%s|%s|%.2f",
-                        transactions.getDate(),
-                        transactions.getTime(),
-                        transactions.getDescription(),
-                        transactions.getVendor(),
-                        transactions.getAmount());
+                        transaction.getDate(),
+                        transaction.getTime(),
+                        transaction.getDescription(),
+                        transaction.getVendor(),
+                        transaction.getAmount());
                 System.out.println(formattedTransaction);
             }
         } else {
@@ -135,10 +139,10 @@ public class Ledger {
 
     }
 
-    private static void onlyPaymentTransaction(ArrayList<Transactions> paymentTransaction) {
+    private static void onlyPaymentTransaction(ArrayList<Transactions> transactions) {
         ArrayList<Transactions> searchResults = new ArrayList<>();
-        for (int i = paymentTransaction.size() - 1; i >= 0; i--) {
-            Transactions transaction = paymentTransaction.get(i);
+        for (int i = transactions.size() - 1; i >= 0; i--) {
+            Transactions transaction = transactions.get(i);
             if (transaction.getDescription().toLowerCase().contains("payment") || transaction.getAmount() < 0) {
                 searchResults.add(transaction);
             }
@@ -147,13 +151,13 @@ public class Ledger {
 
         if (!searchResults.isEmpty()) {
             System.out.println("Search results:");
-            for (Transactions transactions : searchResults) {
+            for (Transactions transaction : searchResults) {
                 String formattedTransaction = String.format("%s|%s|%s|%s|%.2f",
-                        transactions.getDate(),
-                        transactions.getTime(),
-                        transactions.getDescription(),
-                        transactions.getVendor(),
-                        transactions.getAmount());
+                        transaction.getDate(),
+                        transaction.getTime(),
+                        transaction.getDescription(),
+                        transaction.getVendor(),
+                        transaction.getAmount());
                 System.out.println(formattedTransaction);
             }
         } else {
@@ -278,7 +282,7 @@ public class Ledger {
         LocalDate startDate = LocalDate.of(currentDate.getYear() - 1, 1, 1);
 
 
-        LocalDate endDate = LocalDate.of(currentDate.getYear(), 1, 1).plusDays(1);
+        LocalDate endDate = LocalDate.of(currentDate.getYear(), 1, 1);
 
         for (int i = transactions.size() - 1; i >= 0; i--) {
             Transactions transaction = transactions.get(i);

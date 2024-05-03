@@ -1,5 +1,8 @@
 package com.ps;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
@@ -23,6 +26,22 @@ public class Payment {
                 descriptionInput,
                 vendorInput,
                 -amountInput));
-    }
 
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.txt"))) {
+            for (Transactions newTransaction : transactions) {
+                writer.write(String.format("%s|%s|%s|%s|%.2f%n",
+                        newTransaction.getDate(),
+                        newTransaction.getTime(),
+                        newTransaction.getDescription(),
+                        newTransaction.getVendor(),
+                        newTransaction.getAmount()));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+
+        System.out.println("Payment Complete!");
+
+    }
 }
