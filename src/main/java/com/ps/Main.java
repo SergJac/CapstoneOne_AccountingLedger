@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
+        // Read transactions from file
         ArrayList<Transactions> transactions = readTransactionsFromFile("transactions.txt");
 
         String choice;
@@ -32,14 +33,17 @@ public class Main {
         switch (choice) {
             case "D":
                 System.out.println("You chose Add Deposit");
+                // Add deposit transaction
                 Deposit.addTransactions(transactions);
                 break;
             case "P":
                 System.out.println("You chose Make Payment(Debit)");
+                // Add deposit transaction
                 Payment.addTransaction(transactions);
                 break;
             case "L":
                 System.out.println("You chose Ledger");
+                // Display ledger menu
                 Ledger.displayLedgerMenu(scanner, transactions);
                 break;
             case "X":
@@ -58,6 +62,7 @@ public class Main {
 
 }
 
+    // Read transactions from file and populate ArrayList
     public static ArrayList<Transactions> readTransactionsFromFile(String filename) {
         ArrayList<Transactions> transactions = new ArrayList<>();
 
@@ -70,6 +75,7 @@ public class Main {
 
                     if (parts.length == 5) {
 
+                        // Parse transaction details
                         LocalDate date = LocalDate.parse(parts[0]);
                         LocalTime time = LocalTime.parse(parts[1]);
                         String description = parts[2];
@@ -77,15 +83,16 @@ public class Main {
                         float amount = Float.parseFloat(parts[4]);
                         Transactions transaction = new Transactions(date, time, description, vendor, amount);
 
+                        // Add transaction to ArrayList
                         transactions.add(transaction);
                     } else {
 
+                        // Print error message for invalid format
                         System.out.println("Invalid format in line: " + line);
                     }
                 }
             }
         } catch (IOException e) {
-
             e.printStackTrace();
         }
 
